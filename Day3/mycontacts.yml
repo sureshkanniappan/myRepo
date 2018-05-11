@@ -1,0 +1,8 @@
+- name: Demonstrates reading variable from external file
+  hosts: localhost
+  vars_files:
+    - contacts
+  tasks:
+    - name: Print the contact
+      debug: msg="Mobile number of {{item.value.name}} is {{item.value.mobile}}."
+      with_dict: "{{my_contacts}}"

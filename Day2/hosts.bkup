@@ -1,0 +1,13 @@
+[all]
+ansible1 ansible_host=localhost ansible_port=2000 ansible_user=root ansible_private_key_file=/root/.ssh/id_rsa ansible_become_user=root ansible_become_password=root
+ansible2 ansible_host=localhost ansible_port=2001 ansible_user=root ansible_private_key_file=/root/.ssh/id_rsa ansible_become_user=root ansible_become_password=root
+ansible3 ansible_host=localhost ansible_port=2002 ansible_user=root ansible_private_key_file=/root/.ssh/id_rsa ansible_become_user=root ansible_become_password=root
+
+[web]
+ansible1 ansible_host=localhost ansible_port=2000 ansible_user=root ansible_private_key_file=/root/.ssh/id_rsa
+
+[app]
+ansible2 ansible_host=localhost ansible_port=2001 ansible_user=root ansible_private_key_file=/root/.ssh/id_rsa
+
+[db]
+ansible3 ansible_host=localhost ansible_port=2002 ansible_user=root ansible_private_key_file=/root/.ssh/id_rsa ansible_become_user=root ansible_become_password=root

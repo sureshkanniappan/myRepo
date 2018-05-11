@@ -1,0 +1,6 @@
+- name: Demonstrated LOOP
+  hosts: localhost
+  tasks:
+   - name: Iterate through a loop
+     sequence: start=-1 end=5
+     debug: msg="{{item}}"

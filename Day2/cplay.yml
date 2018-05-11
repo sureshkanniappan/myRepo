@@ -1,0 +1,17 @@
+- name: This playbook install vim editor and tree utilities
+  hosts: db
+  gather_facts: yes
+  become: yes
+
+  tasks: 
+    - name: Install vim editor
+      apt: name=vim update_cache=yes state=latest
+      register: vim_output
+
+    - name: Install tree editor
+      apt: name=tree update_cache=yes state=latest
+      register: tree_output
+
+    - name: Print the output of the task
+      debug: var=vim_output
+      debug: var=tree_output

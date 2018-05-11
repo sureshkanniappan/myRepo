@@ -1,0 +1,9 @@
+- name: Demonstrates use of own custom module
+  hosts: localhost
+  tasks:
+   - name: Invoke the Add custom module
+     add: firstInput=100 secondInput=500
+     register: output
+
+   - name: Print the result
+     debug: var=output

@@ -1,0 +1,12 @@
+my_contacts:
+   Suresh:
+      name: Suresh Kanniappan
+      mobile: 9841723802
+
+   Vinodh:
+      name: Vinodh Kumar
+      mobile: 9841724442
+
+   Jaffy:
+      name: Jaffer Shaik
+      mobile: 9777777442

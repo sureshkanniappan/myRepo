@@ -1,0 +1,35 @@
+   95  nslookup google.com
+   96  docker --version
+   97  docker  images
+  100  docker run hello-world
+  114  docker ps
+  122  docker ps -a
+  125  docker run --name suresh -it ubuntu /bin/bash
+  126  docker run -it ubun1 /bin/bash
+  128  docker attach ubun1
+  129  docker exec -it ubun1 bash
+  131  docker run -it ubuntu /bin/bash
+  133  docker start ubuntu
+  137  docker run -d ubuntu bash
+  139  docker run -dit ubuntu bash
+  144  docker exec -t mystifying_mcnulty bash
+  145  docker exec -it ubuntu bash
+  151  docker ps -a
+  152  docker ps -aq
+  153  docker stop $(docker ps -aq)
+  154  docker rm $(docker ps -aq)
+  158  docker images
+  159  docker rmi nginx
+  170  git clone https://github.com/tektutor/ubuntu-ansible.git
+  184  docker build -t verizon/ansible-ubuntu .
+  191  docker run -d --name ansible1 -p 2000:22 -p 8000:80 verizon/ansible-ubuntu 
+  197  docker inspect ansible1 | grep IPA
+  199  docker stats
+  230  ansible -i hosts all -m ping
+  238  cd /usr/lib/python2.7/site-packages/ansible
+  251  docker run -d --name ansible1 -p 2001:22 -p 8001:80 verizon/ansible-ubuntu 
+  328  ansible-playbook -i hosts cplay.yml 
+  379  docker pull microsoft/windowsservercore
+  393  docker exec -it ansible1 bash
+  395  docker exec -it ansible3 vim
+  401  ansible-playbook cplay.yml --limit @cplay.retry

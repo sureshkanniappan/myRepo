@@ -1,0 +1,32 @@
+- name: This playbook installs, configure and deploys web page into nginx web server
+  hosts: all
+  become: yes
+  vars:
+    - organization_name: Verizon
+    - provisioner_tool: Docker
+    - automation_tool: Ansible
+
+  tasks:
+    - name: Install nginx web server
+      apt: name=nginx state=present update_cache=yes
+    
+    - name: Configure nginx web server
+      copy: src=default dest=/etc/nginx/sites-available/default
+      notify:
+        - Restart the nginx web server
+    
+    - name: Configure nginx settings
+      copy: src=nginx.conf dest=/etc/nginx/nginx.conf
+      notify:
+        - Restart the nginx web server
+    
+    - name: Create the nginx web root home
+      shell: "mkdir -p /var/html"
+    
+    - name: Copying the nginx web server index file
+      template: src=index.html.j2 dest=/var/html/index.html
+
+  handlers:
+    - name: Restart the nginx web server
+      shell: "service nginx restart"
+      #service: name=nginx state=restarted

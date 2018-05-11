@@ -1,0 +1,15 @@
+- name: Demonstrates the START of provisioned Docker Container through Ansible playbook
+  hosts: localhost
+  tasks:
+   - name: Start Ubuntu Docker Container
+     docker_container:
+        name: "ubuntu{{item}}"
+        state: started
+     with_sequence: start=1 end=2 
+   
+   - name: Start CentOS Docker Container
+     docker_container:
+        name: "centos{{item}}"
+        state: started
+     with_sequence: start=1 end=2 
+

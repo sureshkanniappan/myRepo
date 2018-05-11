@@ -1,0 +1,19 @@
+---
+
+- name: This playbook demonstrates the use of ping module
+  hosts: all
+
+  tasks:
+    - name: Ping the remote Docker Container
+      ping: 
+
+- name: This is a second play execution
+  hosts: db
+  tasks:
+    - name: List the files in etc folder
+      shell: "uptime"
+      register: output 
+
+    - name: Print the output of the task
+      debug: var=output
+...

@@ -1,0 +1,23 @@
+---
+
+- name: This playbook makes use of custom nginx role.
+  hosts: all
+  vars:
+    task_status: not_running
+  roles:
+    - nginx
+
+  pre_tasks:
+    - debug: msg="This is a pre_tasks"
+
+  tasks:
+    - name: Set the task_status to running
+      set_fact:
+         task_status: running
+
+    - name: Print the task_status value
+      debug: var=task_status
+
+  post_tasks:
+    - debug: msg="This is a post tasks"
+...

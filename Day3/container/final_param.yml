@@ -1,0 +1,20 @@
+- name: Demonstrates the provisioning of Docker Container through Ansible playbook
+  hosts: localhost
+  vars:
+    image: "verizon/ansible-"
+    todo: "{{ action }}"
+    os: "{{ os }}"
+    cport: "{{ conport }}"
+    pport: "{{ appport }}"
+    count: "{{ count }}"
+    cname: "{{ name }}"
+  tasks:
+   - name: Start "{{ os }}" Docker Container
+     docker_container:
+        image: "{{image}}{{ os }}"
+        name: "{{cname}}{{item}}"
+        state: "{{todo}}"
+        ports:
+          - "{{cport}}{{item}}:22"
+          - "{{appport}}{{item}}:80"
+     with_sequence: start=1 end="{{count}}"

@@ -1,0 +1,5 @@
+- name: Reading environmental variables from playbook
+  hosts: localhost
+  tasks:
+    - name: Read and Print Environmental variables
+      debug: msg="DISPLAY = {{lookup('env','DISPLAY')}}; SHELL = {{lookup('env','SHELL')}}; PATH = {{lookup('env','PATH')}}"

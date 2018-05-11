@@ -1,0 +1,25 @@
+- name: Demonstrates the provisioning of Docker Container through Ansible playbook
+  hosts: localhost
+  vars:
+    todo: "{{ action }}"
+  tasks:
+   - name: Start Ubuntu Docker Container
+     docker_container:
+        image: verizon/ansible-ubuntu
+        name: "ubuntu{{item}}"
+        state: "{{ todo }}"
+        ports:
+          - "200{{item}}:22"
+          - "300{{item}}:80"
+     with_sequence: start=1 end=50 
+   
+   - name: Start CentOS Docker Container
+     docker_container:
+        image: verizon/ansible-centos
+        name: "centos{{item}}"
+        state: "{{ todo }}"
+        ports:
+          - "250{{item}}:22"
+          - "350{{item}}:80"
+     with_sequence: start=1 end=50 
+

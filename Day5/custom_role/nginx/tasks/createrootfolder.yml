@@ -1,0 +1,7 @@
+---
+
+- name: Creating nginx Web Root Folder
+  #shell: "mkdir -p /var/html"
+  file: path=/var/html state=directory mode=755
+
+...

@@ -1,0 +1,14 @@
+- name: Demonstrates use of list in ansible playbook
+  hosts: centos
+  vars:
+    - packages:
+         - epel-release
+         - vim
+         - tree
+  tasks:
+    - name: yum update
+      shell: "yum clean all && yum -y update"
+
+    - name: Install list of software packages
+      yum: name="{{item}}" state=present update_cache=yes
+      with_items: "{{packages}}"

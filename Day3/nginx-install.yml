@@ -1,0 +1,52 @@
+- name: This playbook install Nginx and deploy the web page in nginx server
+  hosts: all
+  vars:
+    - greet_message: DevOps!!!
+    - os: "{{ ansible_distribution }} {{ ansible_distribution_version }} "
+    - python: "{{ ansible_python_version }}"
+    - organization_name: Verizon
+    - provisioner_tool: "{{ ansible_virtualization_type }}"
+    - automation_tool: Ansible
+
+  tasks:
+    - name: Install Nginx in Ubuntu Server
+      apt: name=nginx update_cache=yes state=present
+      when: ( ansible_distribution == "Ubuntu" and ansible_os_family == "Debian" )
+
+    - name: Install epel-release package in CentOS Server
+      yum: name=epel-release update_cache=yes state=present
+      when: ( ansible_distribution == "CentOS" and ansible_os_family == "RedHat" )
+
+    - name: Install Nginx in CentOS Server
+      yum: name=nginx update_cache=yes state=present
+      when: ( ansible_distribution == "CentOS" and ansible_os_family == "RedHat" )
+
+    - name: Configure Nginx web root folder in Ubuntu
+      copy: src=default_ubuntu dest=/etc/nginx/sites-available/default
+      when: ( ansible_distribution == "Ubuntu" and ansible_os_family == "Debian" )
+      notify:
+         - Restart nginx server in Ubuntu
+
+    - name: Configure Nginx web root folder in CentOS
+      copy: src=default_centos dest=/etc/nginx/conf.d/default.conf
+      when: ( ansible_distribution == "CentOS" and ansible_os_family == "RedHat" )
+      notify: 
+         - Restart nginx server in CentOS
+
+    - name: Creating nginx Web Root Folder
+      shell: "mkdir -p /var/html"
+
+    - name: Deploy Web page in nginx server of Ubuntu
+      template: src=index_ubuntu.html.j2 dest=/var/html/index.html
+      when: ( ansible_distribution == "Ubuntu" and ansible_os_family == "Debian" )
+
+    - name: Deploy Web page in nginx server of Centos
+      template: src=index_centos.html.j2 dest=/var/html/index.html
+      when: ( ansible_distribution == "CentOS" and ansible_os_family == "RedHat" )
+
+  handlers:
+    - name: Restart nginx server in Ubuntu
+      shell: "/etc/init.d/nginx restart"
+
+    - name: Restart nginx server in CentOS
+      service: name=nginx state=restarted

@@ -1,0 +1,15 @@
+- name: Demonstrates the REMOVAL of provisioned Docker Container through Ansible playbook
+  hosts: localhost
+  tasks:
+   - name: Delete Ubuntu Docker Container
+     docker_container:
+        name: "ubuntu{{item}}"
+        state: absent
+     with_sequence: start=1 end=2 
+   
+   - name: Delete CentOS Docker Container
+     docker_container:
+        name: "centos{{item}}"
+        state: absent
+     with_sequence: start=1 end=2 
+
